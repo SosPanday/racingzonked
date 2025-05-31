@@ -15,11 +15,68 @@ extends Node2D
 
 var used_positions := {}
 
-# Erweiterte place_tiles()-Logik mit Marker2D-System (Rotation + offene Richtungen)
-
 func _ready():
 	var start_point = start_points.pick_random()
-	place_tiles_from_markers(start_point)
+	var path = generate_path(start_point.global_position, end_point.global_position)
+	place_tiles_from_markers(path)
+
+func generate_path(start: Vector2, goal: Vector2) -> Array[Vector2]:
+	var current_pos = world_to_tile(start)
+	var goal_pos = world_to_tile(goal)
+	var path: Array[Vector2] = [current_pos]
+	used_positions[current_pos] = true
+
+	var directions = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
+	var attempts = 0
+
+	while current_pos != goal_pos and path.size() < max_path_length and attempts < 1000:
+		var possible_moves = directions.filter(
+			func(dir):
+				var next = current_pos + dir
+				return not used_positions.has(next)
+		)
+
+		if possible_moves.is_empty():
+			break
+
+		possible_moves.sort_custom(func(a, b):
+			return (current_pos + a).distance_to(goal_pos) < (current_pos + b).distance_to(goal_pos)
+		)
+		
+		var next_move = possible_moves[0] # Beste Richtung
+		current_pos += next_move
+		path.append(current_pos)
+		used_positions[current_pos] = true
+		attempts += 1
+
+	return path
+
+func place_tiles(path: Array[Vector2]):
+	for i in path.size():
+		var tile_pos = path[i] * tile_size
+		var scene_index = 0
+
+		if i > 0:
+			var prev = path[i - 1]
+			var curr = path[i]
+			var dir = curr - prev
+
+			# Logik für Tileauswahl basierend auf Richtung 
+			# (Placeholder - hier könntest du Curve oder Ramp erkennen)
+			if dir.x != 0 and dir.y != 0:
+				scene_index = 1 # Kurve
+			elif randf() < 0.1:
+				scene_index = 2 # Kreuzung
+			elif randf() < 0.1:
+				scene_index = 3 # Rampe
+			else:
+				scene_index = 0 # Gerade
+
+		var tile_instance = tile_scenes[scene_index].instantiate()
+		tile_instance.position = tile_pos
+		add_child(tile_instance)
+
+# Erweiterte place_tiles()-Logik mit Marker2D-System (Rotation + offene Richtungen)
 
 func place_tiles_from_markers(start_tile: Node2D, max_steps: int = 30):
 	var open_exits = []
@@ -91,3 +148,7 @@ func get_marker_connectors(tile: Node) -> Array:
 		if child.is_in_group("connector"):
 			list.append(child)
 	return list
+
+
+func world_to_tile(pos: Vector2) -> Vector2:
+	return Vector2(floor(pos.x / tile_size), floor(pos.y / tile_size))
