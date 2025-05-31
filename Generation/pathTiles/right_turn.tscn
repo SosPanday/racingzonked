@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5p6pdfkxlgp5"]
+
+[ext_resource type="Texture2D" uid="uid://cjoko6q6viwyw" path="res://Right_Turn.png" id="1_wwa2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nic2v"]
+size = Vector2(256, 256)
+
+[node name="TurnRight" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_nic2v")
+
+[node name="Right" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_wwa2d")
+
+[node name="Marker2D" type="Marker2D" parent="." groups=["Connector"]]
+position = Vector2(256, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="." groups=["Connector"]]
+position = Vector2(0, 256)

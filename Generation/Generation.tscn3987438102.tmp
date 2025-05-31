@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://devy5r73qu38a"]
+
+[ext_resource type="Script" uid="uid://bhvv4h23gv2x5" path="res://Generation/generateTrack.gd" id="1_8mj66"]
+[ext_resource type="PackedScene" uid="uid://cypahwkef0qpi" path="res://Generation/pathTiles/straight.tscn" id="2_ju2kd"]
+[ext_resource type="PackedScene" uid="uid://dmp8dwgnce1h2" path="res://Generation/pathTiles/left_turn.tscn" id="3_gaxit"]
+[ext_resource type="PackedScene" uid="uid://c5p6pdfkxlgp5" path="res://Generation/pathTiles/right_turn.tscn" id="4_obnjs"]
+[ext_resource type="PackedScene" uid="uid://dl3ra0dfcnr8s" path="res://Generation/pathTiles/crossover.tscn" id="5_qahp8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Generate" type="Node2D" parent="."]
+position = Vector2(0, 24)
+script = ExtResource("1_8mj66")
+tile_scenes = Array[PackedScene]([ExtResource("2_ju2kd"), ExtResource("3_gaxit"), ExtResource("4_obnjs"), ExtResource("5_qahp8")])
+tile_size = 0
+max_path_length = null
+
+[node name="end_point" type="Node2D" parent="."]
+position = Vector2(0, -160)
+
+[node name="start_points" type="Node2D" parent="."]
+
+[node name="1" type="Node2D" parent="start_points"]
+position = Vector2(192, 0)
+
+[node name="2" type="Node2D" parent="start_points"]
+position = Vector2(-192, 0)
+
+[node name="3" type="Node2D" parent="start_points"]
+position = Vector2(0, 104)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cypahwkef0qpi"]
+
+[ext_resource type="Texture2D" uid="uid://req5cker66c6" path="res://straight.png" id="1_pkqm8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d43ph"]
+size = Vector2(256, 256)
+
+[node name="Straight" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_d43ph")
+
+[node name="Straight" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_pkqm8")
+
+[node name="Marker2D" type="Marker2D" parent="." groups=["Connector"]]
+position = Vector2(0, -256)
+
+[node name="Marker2D2" type="Marker2D" parent="." groups=["Connector"]]
+position = Vector2(0, 256)

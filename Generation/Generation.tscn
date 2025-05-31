@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://devy5r73qu38a"]
+
+[ext_resource type="Script" uid="uid://bhvv4h23gv2x5" path="res://Generation/generateTrack.gd" id="1_8mj66"]
+[ext_resource type="Script" uid="uid://l83b4xd757by" path="res://Scripts/cameraMovement.gd" id="1_ju2kd"]
+[ext_resource type="PackedScene" uid="uid://cypahwkef0qpi" path="res://Generation/pathTiles/straight.tscn" id="2_ju2kd"]
+[ext_resource type="PackedScene" uid="uid://dmp8dwgnce1h2" path="res://Generation/pathTiles/left_turn.tscn" id="3_gaxit"]
+[ext_resource type="Texture2D" uid="uid://cr0ukvq5cvpao" path="res://End.png" id="3_qelgk"]
+[ext_resource type="Texture2D" uid="uid://bedy20j0ag7ro" path="res://Start.png" id="4_huh5f"]
+[ext_resource type="PackedScene" uid="uid://c5p6pdfkxlgp5" path="res://Generation/pathTiles/right_turn.tscn" id="4_obnjs"]
+[ext_resource type="PackedScene" uid="uid://dl3ra0dfcnr8s" path="res://Generation/pathTiles/crossover.tscn" id="5_qahp8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_ju2kd")
+
+[node name="Generate" type="Node2D" parent="."]
+script = ExtResource("1_8mj66")
+tile_scenes = Array[PackedScene]([ExtResource("3_gaxit"), ExtResource("5_qahp8"), ExtResource("4_obnjs"), ExtResource("2_ju2kd")])
+tile_size = 256
+
+[node name="End" type="Sprite2D" parent="."]
+position = Vector2(48, -4688)
+texture = ExtResource("3_qelgk")
+
+[node name="end_point" type="Node2D" parent="."]
+position = Vector2(48, -4688)
+
+[node name="start_points" type="Node2D" parent="."]
+
+[node name="1" type="Node2D" parent="start_points" groups=["Connector"]]
+position = Vector2(4952, 4224)
+
+[node name="2" type="Node2D" parent="start_points" groups=["Connector"]]
+position = Vector2(-4120, 4032)
+
+[node name="3" type="Node2D" parent="start_points" groups=["Connector"]]
+position = Vector2(784, 4056)
+
+[node name="Start2" type="Sprite2D" parent="."]
+position = Vector2(-4120, 4032)
+texture = ExtResource("4_huh5f")
+
+[node name="Start3" type="Sprite2D" parent="."]
+position = Vector2(4952, 4224)
+texture = ExtResource("4_huh5f")
+
+[node name="Start" type="Sprite2D" parent="."]
+position = Vector2(784, 4056)
+texture = ExtResource("4_huh5f")

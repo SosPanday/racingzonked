@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="RacingCthulhu"
+run/main_scene="uid://devy5r73qu38a"
+config/features=PackedStringArray("4.4", "Forward Plus")
+
+[display]
+
+window/size/viewport_width=384
+window/size/viewport_height=216
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[global_group]
+
+Connector="Group for Connectors"
+
+[rendering]
+
+2d/snap/snap_2d_transforms_to_pixel=true
