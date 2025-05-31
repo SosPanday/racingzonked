@@ -1,12 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://by3iby3cwj5x4"]
 
+[ext_resource type="Script" uid="uid://bwe6psescu28l" path="res://Scripts/TrackTile.gd" id="1_ak6g5"]
 [ext_resource type="Texture2D" uid="uid://cjoko6q6viwyw" path="res://Right_Turn.png" id="1_rsbpx"]
-[ext_resource type="Script" uid="uid://shenqbaw6q02" path="res://Scripts/Connector.gd" id="2_6urs1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nic2v"]
 size = Vector2(256, 256)
 
 [node name="TurnRight" type="Node2D"]
+script = ExtResource("1_ak6g5")
+connections = Array[Vector2]([Vector2(1, 0), Vector2(0, -1)])
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -16,12 +18,3 @@ shape = SubResource("RectangleShape2D_nic2v")
 [node name="Right" type="Sprite2D" parent="Area2D"]
 texture = ExtResource("1_rsbpx")
 flip_v = true
-
-[node name="East" type="Marker2D" parent="." groups=["Connector"]]
-position = Vector2(256, 0)
-script = ExtResource("2_6urs1")
-direction = 1
-
-[node name="North" type="Marker2D" parent="." groups=["Connector"]]
-position = Vector2(0, -256)
-script = ExtResource("2_6urs1")
