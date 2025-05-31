@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c16aqx8alkxaa"]
+
+[ext_resource type="Texture2D" uid="uid://req5cker66c6" path="res://straight.png" id="1_qwtfk"]
+[ext_resource type="Script" uid="uid://shenqbaw6q02" path="res://Scripts/Connector.gd" id="2_3m0fy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d43ph"]
+size = Vector2(256, 256)
+
+[node name="Straight" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_d43ph")
+
+[node name="Straight" type="Sprite2D" parent="Area2D"]
+rotation = 1.5708
+texture = ExtResource("1_qwtfk")
+
+[node name="West" type="Marker2D" parent="." groups=["Connector"]]
+position = Vector2(-256, 0)
+script = ExtResource("2_3m0fy")
+direction = 3
+
+[node name="East" type="Marker2D" parent="." groups=["Connector"]]
+position = Vector2(256, 0)
+script = ExtResource("2_3m0fy")
+direction = 1

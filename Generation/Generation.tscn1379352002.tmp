@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bhvv4h23gv2x5" path="res://Generation/generateTrack.gd" id="1_8mj66"]
 [ext_resource type="Script" uid="uid://l83b4xd757by" path="res://Scripts/cameraMovement.gd" id="1_ju2kd"]
-[ext_resource type="PackedScene" uid="uid://cypahwkef0qpi" path="res://Generation/pathTiles/straight_up.tscn" id="2_ju2kd"]
-[ext_resource type="PackedScene" uid="uid://dmp8dwgnce1h2" path="res://Generation/pathTiles/turn_left_down.tscn" id="3_gaxit"]
+[ext_resource type="PackedScene" uid="uid://cypahwkef0qpi" path="res://Generation/pathTiles/straight.tscn" id="2_ju2kd"]
+[ext_resource type="PackedScene" uid="uid://dmp8dwgnce1h2" path="res://Generation/pathTiles/left_turn.tscn" id="3_gaxit"]
 [ext_resource type="Texture2D" uid="uid://cr0ukvq5cvpao" path="res://End.png" id="3_qelgk"]
 [ext_resource type="Texture2D" uid="uid://bedy20j0ag7ro" path="res://Start.png" id="4_huh5f"]
-[ext_resource type="PackedScene" uid="uid://c5p6pdfkxlgp5" path="res://Generation/pathTiles/turn_right_down.tscn" id="4_obnjs"]
+[ext_resource type="PackedScene" uid="uid://c5p6pdfkxlgp5" path="res://Generation/pathTiles/right_turn.tscn" id="4_obnjs"]
 [ext_resource type="PackedScene" uid="uid://dl3ra0dfcnr8s" path="res://Generation/pathTiles/crossover.tscn" id="5_qahp8"]
 
 [node name="Node2D" type="Node2D"]
