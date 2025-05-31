@@ -5,7 +5,7 @@ extends Node2D
 @export var max_path_length: int = 30
 
 @onready var start_points := $"../start_points".get_children()
-@onready var end_point   := $"../end_point"
+@onready var end_points   := $"../end_point".get_children()
 
 # Hier speichern wir scene + deren connections
 var tile_types := []
@@ -20,7 +20,7 @@ func _ready():
 
 	# 2) Path generieren + Tiles platzieren
 	var start = start_points.pick_random().global_position
-	var goal  = end_point.global_position
+	var goal  = end_points.pick_random().global_position
 	var path  = generate_path(start, goal)
 	place_tiles(path)
 
@@ -54,9 +54,9 @@ func generate_path(start: Vector2, goal: Vector2) -> Array[Vector2]:
 				continue
 
 			came_from[neighbor] = current
-			g_score[neighbor]     = tentative_g
-			var noise = randf_range(-0.2, 0.2)
-			var h     = neighbor.distance_to(goal_cell)
+			g_score[neighbor] = tentative_g
+			var noise = randf_range(-1.5, 1.5)
+			var h = neighbor.distance_to(goal_cell)
 			f_score[neighbor] = tentative_g + (1.0 + noise) * h
 
 	# Falls kein Weg gefunden wurde, leeres typed Array zurückliefern
@@ -83,11 +83,6 @@ func _get_lowest_f(open_set: Array[Vector2], f_score: Dictionary) -> Vector2:
 		elif f_cell == f_best and randf() < 0.5:
 			best = cell
 	return best
-
-# (Optional) Prüfen, ob eine Zelle im erlaubten Spielfeld liegt
-#func _is_in_bounds(cell: Vector2) -> bool:
-	#return cell.x >= 0 and cell.y >= 0 and cell.x < map_width and cell.y < map_height
-
 
 func place_tiles(path: Array[Vector2]) -> void:
 	for i in range(path.size()):
@@ -126,6 +121,9 @@ func place_tiles(path: Array[Vector2]) -> void:
 		inst.position = cell * tile_size
 		add_child(inst)
 
+
+func place_first_tile(path: Array[Vector2]) -> void:
+	
 
 
 func world_to_tile(pos: Vector2) -> Vector2:

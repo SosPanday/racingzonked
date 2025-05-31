@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://devy5r73qu38a"]
+[gd_scene load_steps=9 format=3 uid="uid://devy5r73qu38a"]
 
 [ext_resource type="Script" uid="uid://l83b4xd757by" path="res://Scripts/cameraMovement.gd" id="1_ju2kd"]
 [ext_resource type="Script" uid="uid://bawexnyo6ufvh" path="res://Scripts/GenerationForth.gd" id="2_huh5f"]
 [ext_resource type="PackedScene" uid="uid://dn6nvsegyunsf" path="res://Generation/pathTiles/straight_down.tscn" id="3_6ywai"]
-[ext_resource type="Texture2D" uid="uid://cr0ukvq5cvpao" path="res://End.png" id="3_qelgk"]
-[ext_resource type="Texture2D" uid="uid://bedy20j0ag7ro" path="res://Start.png" id="4_huh5f"]
 [ext_resource type="PackedScene" uid="uid://c16aqx8alkxaa" path="res://Generation/pathTiles/straight_right.tscn" id="5_f8puo"]
 [ext_resource type="PackedScene" uid="uid://dmp8dwgnce1h2" path="res://Generation/pathTiles/turn_left_down.tscn" id="7_d5b88"]
 [ext_resource type="PackedScene" uid="uid://syylutw42arl" path="res://Generation/pathTiles/turn_left_up.tscn" id="8_thsav"]
@@ -21,39 +19,28 @@ script = ExtResource("1_ju2kd")
 [node name="Generate" type="Node2D" parent="."]
 script = ExtResource("2_huh5f")
 tile_scenes = Array[PackedScene]([ExtResource("3_6ywai"), ExtResource("5_f8puo"), ExtResource("7_d5b88"), ExtResource("8_thsav"), ExtResource("9_68ey7"), ExtResource("10_ohtv5")])
-
-[node name="End" type="Sprite2D" parent="."]
-position = Vector2(48, -4688)
-texture = ExtResource("3_qelgk")
+tile_size = null
+max_path_length = null
 
 [node name="end_point" type="Node2D" parent="."]
-position = Vector2(48, -4688)
+position = Vector2(-96, 64)
+
+[node name="1" type="Node2D" parent="end_point"]
+position = Vector2(152, -8192)
+
+[node name="2" type="Node2D" parent="end_point"]
+position = Vector2(-13576, 15752)
+
+[node name="3" type="Node2D" parent="end_point"]
+position = Vector2(15712, 15528)
 
 [node name="start_points" type="Node2D" parent="."]
 
 [node name="1" type="Node2D" parent="start_points" groups=["Connector"]]
-position = Vector2(4952, 4224)
-
-[node name="Marker2D" type="Marker2D" parent="start_points/1" groups=["Connector"]]
+position = Vector2(12696, -80)
 
 [node name="2" type="Node2D" parent="start_points" groups=["Connector"]]
-position = Vector2(-4120, 4032)
-
-[node name="Marker2D" type="Marker2D" parent="start_points/2" groups=["Connector"]]
+position = Vector2(-12760, -568)
 
 [node name="3" type="Node2D" parent="start_points" groups=["Connector"]]
-position = Vector2(784, 4056)
-
-[node name="Marker2D" type="Marker2D" parent="start_points/3" groups=["Connector"]]
-
-[node name="Start2" type="Sprite2D" parent="."]
-position = Vector2(-4120, 4032)
-texture = ExtResource("4_huh5f")
-
-[node name="Start3" type="Sprite2D" parent="."]
-position = Vector2(4952, 4224)
-texture = ExtResource("4_huh5f")
-
-[node name="Start" type="Sprite2D" parent="."]
-position = Vector2(784, 4056)
-texture = ExtResource("4_huh5f")
+position = Vector2(40, 10528)
