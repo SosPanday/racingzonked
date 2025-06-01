@@ -19,6 +19,7 @@ func _ready():
 	var start_point = start_points.pick_random()
 	var path = generate_path(start_point.global_position, end_point.global_position)
 	place_tiles(path)
+	spawn
 
 func generate_path(start: Vector2, goal: Vector2) -> Array[Vector2]:
 	var current_pos = world_to_tile(start)

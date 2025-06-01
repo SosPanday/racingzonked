@@ -1,20 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://by3iby3cwj5x4"]
+[gd_scene load_steps=6 format=3 uid="uid://by3iby3cwj5x4"]
 
-[ext_resource type="Script" uid="uid://bwe6psescu28l" path="res://Scripts/TrackTile.gd" id="1_ak6g5"]
-[ext_resource type="Texture2D" uid="uid://cjoko6q6viwyw" path="res://Right_Turn.png" id="1_rsbpx"]
+[ext_resource type="Script" path="res://Scripts/TrackTile.gd" id="1_ak6g5"]
+[ext_resource type="Texture2D" uid="uid://7arkpf6kqbi8" path="res://curve.png" id="2_6urs1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nic2v"]
-size = Vector2(256, 256)
+size = Vector2(48, 256)
 
-[node name="TurnRight" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6urs1"]
+size = Vector2(216, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak6g5"]
+size = Vector2(48, 48)
+
+[node name="TurnRight" type="StaticBody2D"]
 script = ExtResource("1_ak6g5")
 connections = Array[Vector2]([Vector2(1, 0), Vector2(0, -1)])
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Right" type="Sprite2D" parent="."]
+texture = ExtResource("2_6urs1")
+flip_v = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-104, 0)
 shape = SubResource("RectangleShape2D_nic2v")
 
-[node name="Right" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("1_rsbpx")
-flip_v = true
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(20, 104)
+shape = SubResource("RectangleShape2D_6urs1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(104, -104)
+shape = SubResource("RectangleShape2D_ak6g5")

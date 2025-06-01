@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbhkgc5lgcdb"]
+
+[ext_resource type="PackedScene" uid="uid://bgqfss8a3hgyh" path="res://Car/playerCar.tscn" id="1_i7w8q"]
+[ext_resource type="Texture2D" uid="uid://cgkmlobcgnbj3" path="res://cross.png" id="2_y07u7"]
+
+[node name="CarTest" type="Node2D"]
+
+[node name="Cross" type="Sprite2D" parent="."]
+position = Vector2(56, 96)
+texture = ExtResource("2_y07u7")
+
+[node name="PlayerCar" parent="." instance=ExtResource("1_i7w8q")]
+position = Vector2(72, 112)
+input_pickable = true
+steering_angle = 40.0
+idle_brake = 50.0
+friction = -100.0
+traction_fast = 55.0
+
+[node name="Container2" type="HBoxContainer" parent="PlayerCar"]
+offset_right = 74.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="PlayerCar/Container2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerCar/Container2"]
+layout_mode = 2
+text = "Test Text"
+
+[node name="Camera2D2" type="Camera2D" parent="PlayerCar"]

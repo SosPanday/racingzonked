@@ -4,6 +4,10 @@ extends Node2D
 @export var tile_size: int = 256
 @export var max_path_length: int = 30
 
+@export var start_scene: PackedScene
+@export var end_scene: PackedScene
+@export var player_scene: PackedScene
+
 @onready var start_points := $"../start_points".get_children()
 @onready var end_points   := $"../end_point".get_children()
 
@@ -21,7 +25,9 @@ func _ready():
 	var start = start_points.pick_random().global_position
 	var goal  = end_points.pick_random().global_position
 	var path  = generate_path(start, goal)
+	place_first_tile(path)
 	place_tiles(path)
+	spawn_player(start)
 
 func generate_path(start: Vector2, goal: Vector2) -> Array[Vector2]:
 	var start_cell : Vector2 = world_to_tile(start)
@@ -54,7 +60,7 @@ func generate_path(start: Vector2, goal: Vector2) -> Array[Vector2]:
 
 			came_from[neighbor] = current
 			g_score[neighbor] = tentative_g
-			var noise = randf_range(-1.5, 1.5)
+			var noise = randf_range(-1.5, 15.5)
 			var h = neighbor.distance_to(goal_cell)
 			f_score[neighbor] = tentative_g + (1.0 + noise) * h
 
@@ -83,7 +89,7 @@ func _get_lowest_f(open_set: Array[Vector2], f_score: Dictionary) -> Vector2:
 	return best
 
 func place_tiles(path: Array[Vector2]) -> void:
-	for i in range(path.size()):
+	for i in range(1, path.size() - 1):
 		var cell : Vector2 = path[i]
 		var entry_dir : Vector2 = Vector2.ZERO
 		var exit_dir  : Vector2 = Vector2.ZERO
@@ -111,13 +117,52 @@ func place_tiles(path: Array[Vector2]) -> void:
 			continue
 
 		var chosen = candidates[randi() % candidates.size()]
-		var inst   = chosen.instantiate()
+		var inst = chosen.instantiate()
 		inst.position = cell * tile_size
 		add_child(inst)
 
-
 func place_first_tile(path: Array[Vector2]) -> void:
-	
+	if path.is_empty():
+		push_warning("Path ist leer! Keine Start-Tile möglich.")
+		return
+
+	var start_cell: Vector2 = path[0]  # Erste Position im Pfad
+	var start_dir: Vector2 = path[1] - start_cell  # Richtung zum nächsten Tile
+
+	var tile = start_scene.instantiate()
+	tile.position = start_cell * tile_size
+
+	# Rotation setzen: 90° Schritte basierend auf Richtung
+	tile.rotation += _get_rotation_from_direction(start_dir)
+
+	add_child(tile)
+
+
+func place_last_tile(path: Array[Vector2]) -> void:
+	if path.is_empty():
+		push_warning("Path ist leer! Keine End-Tile möglich.")
+		return
+
+	var end_cell: Vector2 = path[-1]  # Letzte Position im Pfad
+	var tile = end_scene.instantiate()
+	tile.position = end_cell * tile_size
+	add_child(tile)
+
+func _get_rotation_from_direction(direction: Vector2) -> float:
+	if direction == Vector2.RIGHT:
+		return deg_to_rad(90)
+	elif direction == Vector2.DOWN:
+		return deg_to_rad(180)
+	elif direction == Vector2.LEFT:
+		return deg_to_rad(270)
+	elif direction == Vector2.UP:
+		return deg_to_rad(0)
+	return 0  # Fallsa irgendwas schiefläuft, bleibt es auf 0°
+
+func spawn_player(start: Vector2) -> void:  # Start-Tile Position nutzen
+	var player = player_scene.instantiate()  # Player-Scene instanziieren
+	player.position = start
+	add_child(player)
 
 
 func world_to_tile(pos: Vector2) -> Vector2:

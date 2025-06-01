@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgqfss8a3hgyh"]
+
+[ext_resource type="Script" uid="uid://dsfsom2jowdeg" path="res://Car/playerController.gd" id="1_6npos"]
+[ext_resource type="Texture2D" uid="uid://blq6p6sqtyekl" path="res://Car/playerCar.png" id="2_iqmht"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7p4yx"]
+radius = 8.0
+height = 32.0
+
+[node name="PlayerCar" type="CharacterBody2D"]
+top_level = true
+motion_mode = 1
+script = ExtResource("1_6npos")
+engine_power = 4500.0
+idle_brake = 10.0
+friction = -50.0
+drag = -0.95
+base_max_speed = 375.0
+boost_increment = 3.0
+boost_decay = 5.0
+traction_fast = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7p4yx")
+
+[node name="PlayerCar" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 4.76837e-07)
+rotation = 1.5708
+texture = ExtResource("2_iqmht")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotation = 1.5708
+position_smoothing_speed = 0.5
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 0.5
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.04
+drag_top_margin = 0.03
+drag_right_margin = 0.04
+drag_bottom_margin = 0.04
+
+[node name="Container" type="HBoxContainer" parent="Camera2D"]
+offset_right = 74.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="Camera2D/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/Container"]
+layout_mode = 2
+text = "Test Text"

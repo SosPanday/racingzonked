@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dns17ers3p3oh"]
+
+[ext_resource type="Script" path="res://Scripts/TrackTile.gd" id="1_h8ys5"]
+[ext_resource type="Texture2D" uid="uid://d13wsex4n47yu" path="res://start_title.png" id="2_xvu4x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aliqq"]
+size = Vector2(16, 256)
+
+[node name="StartTile" type="Area2D"]
+disable_mode = 1
+script = ExtResource("1_h8ys5")
+connections = Array[Vector2]([Vector2(0, -1)])
+
+[node name="Straight" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = ExtResource("2_xvu4x")
+flip_v = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(120, 0)
+shape = SubResource("RectangleShape2D_aliqq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-120, 0)
+shape = SubResource("RectangleShape2D_aliqq")

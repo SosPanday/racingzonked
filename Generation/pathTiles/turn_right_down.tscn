@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5p6pdfkxlgp5"]
+[gd_scene load_steps=6 format=3 uid="uid://c5p6pdfkxlgp5"]
 
-[ext_resource type="Texture2D" uid="uid://cjoko6q6viwyw" path="res://Right_Turn.png" id="1_wwa2d"]
+[ext_resource type="Texture2D" uid="uid://7arkpf6kqbi8" path="res://curve.png" id="1_ihk2u"]
 
 [sub_resource type="GDScript" id="GDScript_rpen6"]
 script/source = "extends Node2D
@@ -8,16 +8,29 @@ script/source = "extends Node2D
 @export var connections: Array[Vector2] = [Vector2.RIGHT, Vector2.DOWN]
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nic2v"]
-size = Vector2(256, 256)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihk2u"]
+size = Vector2(48, 256)
 
-[node name="TurnRight" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpen6"]
+size = Vector2(216, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1icu2"]
+size = Vector2(48, 48)
+
+[node name="TurnRight" type="StaticBody2D"]
 script = SubResource("GDScript_rpen6")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Right" type="Sprite2D" parent="."]
+texture = ExtResource("1_ihk2u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_nic2v")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-104, 0)
+shape = SubResource("RectangleShape2D_ihk2u")
 
-[node name="Right" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("1_wwa2d")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(16, -104)
+shape = SubResource("RectangleShape2D_rpen6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(104, 104)
+shape = SubResource("RectangleShape2D_1icu2")

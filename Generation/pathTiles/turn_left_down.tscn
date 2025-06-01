@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmp8dwgnce1h2"]
+[gd_scene load_steps=6 format=3 uid="uid://dmp8dwgnce1h2"]
 
-[ext_resource type="Texture2D" uid="uid://cfaxyaul1cbjq" path="res://Left_Turn.png" id="1_v206r"]
-[ext_resource type="Script" uid="uid://shenqbaw6q02" path="res://Scripts/Connector.gd" id="2_omlad"]
+[ext_resource type="Texture2D" uid="uid://7arkpf6kqbi8" path="res://curve.png" id="1_lwuw2"]
 
 [sub_resource type="GDScript" id="GDScript_8tnsv"]
 script/source = "extends Node2D
@@ -9,24 +8,30 @@ script/source = "extends Node2D
 @export var connections: Array[Vector2] = [Vector2.LEFT, Vector2.DOWN]
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xapsk"]
-size = Vector2(256, 256)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwuw2"]
+size = Vector2(48, 256)
 
-[node name="TurnLeft" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tnsv"]
+size = Vector2(208, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4f05w"]
+size = Vector2(48, 48)
+
+[node name="TurnLeft" type="StaticBody2D"]
 script = SubResource("GDScript_8tnsv")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Left" type="Sprite2D" parent="."]
+texture = ExtResource("1_lwuw2")
+flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_xapsk")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(104, 0)
+shape = SubResource("RectangleShape2D_lwuw2")
 
-[node name="Left" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("1_v206r")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-24, -104)
+shape = SubResource("RectangleShape2D_8tnsv")
 
-[node name="West" type="Marker2D" parent="." groups=["Connector"]]
-script = ExtResource("2_omlad")
-direction = 3
-
-[node name="South" type="Marker2D" parent="." groups=["Connector"]]
-script = ExtResource("2_omlad")
-direction = 2
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-104, 104)
+shape = SubResource("RectangleShape2D_4f05w")
